@@ -70,3 +70,51 @@ mpg |>
   mutate(cty_metric = 0.425144 * cty) |> 
   filter(cty_metric < 7)
 
+# Grouped summaries
+# Uso do group_by seguido do summarise 
+# No exemplo, agrupado por categoria (class) e geração de 
+# estatísticas (média e mediana) para cada categoria
+mpg |>
+  group_by(class) |> 
+  summarise(mean(cty),
+            median(cty))
+
+
+# Visualização de dados com ggplot2 (parte do tidyverse)
+
+# aes() significa estética, que define cty como variável no eixo x
+# geom_histogram() gera um histograma
+ggplot(mpg, aes(x = cty)) +
+  geom_histogram() +
+  labs(x = "City mileage")
+
+# plota um segundo gráfico na mesma janela/painel
+ggplot(mpg, aes(x = cty)) +
+  geom_histogram() +
+  geom_freqpoly() +
+  labs(x = "City mileage")
+
+# Plota um "scatter plot" com uma linha de regressão
+ggplot(mpg, aes(x = cty,
+                y = hwy)) +
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  labs(x = "City mileage",
+       y = "Highway mileage")
+
+# Adicionar classificação por classe por cor
+ggplot(mpg, aes(x = cty,
+                y = hwy,
+                color = class)) +
+  geom_point() + 
+  labs(x = "City mileage",
+       y = "Highway mileage")
+
+# alterando a paleta de cores do gráfico
+ggplot(mpg, aes(x = cty,
+                y = hwy,
+                color = class)) +
+  geom_point() + 
+  labs(x = "City mileage",
+       y = "Highway mileage") +
+  scale_color_brewer(palette = "Dark2")
