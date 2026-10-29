@@ -90,7 +90,6 @@ ggplot(mpg, aes(x = cty)) +
 
 # plota um segundo gráfico na mesma janela/painel
 ggplot(mpg, aes(x = cty)) +
-  geom_histogram() +
   geom_freqpoly() +
   labs(x = "City mileage")
 
